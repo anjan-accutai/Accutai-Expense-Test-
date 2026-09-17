@@ -1,4 +1,5 @@
 Feature: Add entry transaction creation
+  @smoke @regression
   Scenario: Record a transaction for each category
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

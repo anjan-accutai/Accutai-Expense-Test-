@@ -1,4 +1,5 @@
 Feature: Sidebar navigation
+  @smoke
   Scenario: Switch between sidebar sections
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

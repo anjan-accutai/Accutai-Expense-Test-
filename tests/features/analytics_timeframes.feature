@@ -1,4 +1,5 @@
 Feature: Analytics timeframe toggles
+  @regression
   Scenario: Switch between monthly quarterly and yearly analytics
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

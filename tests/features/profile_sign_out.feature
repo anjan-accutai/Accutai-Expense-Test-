@@ -1,4 +1,5 @@
 Feature: User profile and secure sign out
+  @smoke
   Scenario: Verify profile details and sign out
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

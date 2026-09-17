@@ -1,4 +1,5 @@
 Feature: Future expense planning
+  @regression
   Scenario: Record a future dated expense
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

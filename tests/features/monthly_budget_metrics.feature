@@ -1,4 +1,5 @@
 Feature: Monthly budget metrics
+  @regression
   Scenario: View monthly budget and financial metrics
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

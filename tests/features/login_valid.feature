@@ -1,4 +1,5 @@
 Feature: Valid user login
+  @smoke
   Scenario: Login with valid credentials
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"
