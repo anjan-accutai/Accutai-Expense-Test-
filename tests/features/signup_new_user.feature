@@ -1,4 +1,5 @@
 Feature: New user registration
+  @regression
   Scenario: Create a new user account
     Given I am on the Accutai login page
     When I click Register

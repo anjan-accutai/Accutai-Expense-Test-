@@ -1,4 +1,5 @@
 Feature: Company Budget management
+  @regression
   Scenario: Review company budget utilization and category breakdown
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

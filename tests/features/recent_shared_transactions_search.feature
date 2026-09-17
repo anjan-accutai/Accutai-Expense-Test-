@@ -1,4 +1,5 @@
 Feature: Recent shared transactions search
+  @regression
   Scenario: Search and filter the ledger by keyword
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

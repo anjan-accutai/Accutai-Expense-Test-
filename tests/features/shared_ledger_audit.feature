@@ -1,4 +1,5 @@
 Feature: Shared Company Ledger audit view
+  @regression
   Scenario: Review shared transaction audit data
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"

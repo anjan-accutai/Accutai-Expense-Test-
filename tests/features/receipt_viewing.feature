@@ -1,4 +1,5 @@
 Feature: Receipt viewing
+  @regression
   Scenario: View an attached receipt from a transaction
     Given I am on the Accutai login page
     When I enter username "anjan" and password "123456"
