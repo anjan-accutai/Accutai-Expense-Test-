@@ -29,9 +29,6 @@ screenshots/
 videos/
 traces/
 
-# Generated test reports
-reports/
-
 # Package and tool caches
 .uv/
 .mypy_cache/

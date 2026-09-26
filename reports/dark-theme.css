@@ -1,0 +1,52 @@
+html,
+body {
+  background: #111827;
+  color: #d1d5db;
+}
+
+h1,
+h2,
+p {
+  color: #f3f4f6;
+}
+
+a {
+  color: #93c5fd;
+}
+
+#environment td,
+#results-table,
+#results-table th,
+#results-table td {
+  border-color: #374151;
+}
+
+#environment tr:nth-child(odd),
+#results-table tr:nth-child(odd) {
+  background-color: #1f2937;
+}
+
+#results-table {
+  color: #d1d5db;
+}
+
+.logwrapper,
+.logwrapper .logexpander {
+  background-color: #1f2937;
+}
+
+.logwrapper .log {
+  background-color: #0f172a;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+.logwrapper .logexpander:hover {
+  color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+button,
+button:hover {
+  color: #e5e7eb;
+}
