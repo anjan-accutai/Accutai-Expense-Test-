@@ -8,7 +8,7 @@ on:
     branches: [main]
 
   schedule:
-    # 18:00 IST daily (IST = UTC+5:30)
+    # Every day at 18:00 IST (12:30 UTC)
     - cron: "30 12 * * *"
 
   workflow_dispatch:
@@ -20,36 +20,44 @@ jobs:
     timeout-minutes: 30
 
     steps:
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Install uv
       - name: Install uv
-        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
         with:
           enable-cache: true
 
-      - name: Install Python (pinned by .python-version)
+      # 3. Install Python
+      - name: Install Python
         run: uv python install
 
+      # 4. Install project dependencies
       - name: Install project dependencies
         run: uv sync --locked
 
-      - name: Install Playwright's Chromium build
+      # 5. Install Chromium
+      - name: Install Playwright Chromium
         run: uv run playwright install --with-deps chromium
 
-      - name: Ensure reports/ and dark-theme.css exist
+      # 6. Prepare reports directory
+      - name: Prepare reports directory
         run: |
           mkdir -p reports
           touch reports/dark-theme.css
 
-      - name: Verify test files
+      # 7. Run tests
+      - name: Run test suite
+        env:
+          ACCUTAI_USERNAME: ${{ secrets.ACCUTAI_USERNAME }}
+          ACCUTAI_PASSWORD: ${{ secrets.ACCUTAI_PASSWORD }}
         run: |
-          echo "=== Test files ==="
-          find tests -type f -print
+          echo "Running Accutai Playwright tests..."
+          uv run pytest tests/test.py -v
 
-      - name: Run test suite (headless)
-        run: uv run pytest tests/test.py -v
-
+      # 8. Upload reports even if tests fail
       - name: Upload HTML test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,13 +66,11 @@ jobs:
           path: reports/
           retention-days: 14
 
-      - name: Clear test transactions (nightly run only)
+      # 9. Delete test transactions after scheduled/nightly run
+      - name: Clear test transactions
         if: always() && github.event_name == 'schedule'
-        run: uv run python scripts/delete_all_transactions.py
-        # To use different demo credentials for cleanup,
-        # add ACCUTAI_USERNAME and ACCUTAI_PASSWORD
-        # as repository secrets.
-        #
-        # env:
-        #   ACCUTAI_USERNAME: ${{ secrets.ACCUTAI_USERNAME }}
-        #   ACCUTAI_PASSWORD: ${{ secrets.ACCUTAI_PASSWORD }}
+        env:
+          ACCUTAI_USERNAME: ${{ secrets.ACCUTAI_USERNAME }}
+          ACCUTAI_PASSWORD: ${{ secrets.ACCUTAI_PASSWORD }}
+        run: |
+          uv run python scripts/delete_all_transactions.py
